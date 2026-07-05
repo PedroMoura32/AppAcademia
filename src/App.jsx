@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './db';
 import './App.css';
-import supinoImg from './exercises/supino-reto.webp';
+import { exerciseImages } from './exercises/importImages';
 import {
   Play,
   Pause,
@@ -37,7 +37,7 @@ const MOCK_EXERCISES = [
     muscleGroup: 'Peito',
     equipment: 'Barra',
     prescribedGoal: '4 séries de 8 a 10',
-    imageGifUrl: supinoImg,
+    imageGifUrl: exerciseImages.s,
   },
   {
     id: 2,
