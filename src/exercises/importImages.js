@@ -1,13 +1,20 @@
 import supinoReto from './supino-reto.webp';
-/*import tricepsCorda from './triceps-corda.webp';
-import puxadaFrontal from './puxada-frontal.webp';
-import roscaDireta from './rosca-direta.webp';
-import agachamento from './agachamento.webp';*/
+import alongamentoEspaldar from './alongamentoEspaldar.webp';
+import ombroRotacaoBastao from './ombroRotacaoBastao.webp';
+import crucifixoInclinadoHalter from './crucifixoInclinadoHalter.webp';
+import supinoInclinadoHalter from './supinoInclinadoHalter.webp';
+import peitoCrucifixoMaquina from './peitoCrucifixoMaquina.webp';
+import tricepsPulleyPronado from './tricepsPulleyPronado.webp';
+import tricepsTestaPoliaAlta from './tricepsTestaPoliaAlta.webp';
+
 
 export const exerciseImages = {
-  supinoReto/*,
-  tricepsCorda,
-  puxadaFrontal,
-  roscaDireta,
-  agachamento,*/
+  supinoReto,
+  alongamentoEspaldar,
+  ombroRotacaoBastao,
+  crucifixoInclinadoHalter,
+  supinoInclinadoHalter,
+  peitoCrucifixoMaquina,
+  tricepsPulleyPronado,
+  tricepsTestaPoliaAlta
 };
