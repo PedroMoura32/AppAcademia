@@ -35,7 +35,10 @@
   backdrop-filter: none;
   border-bottom: 1px solid var(--border);
   padding: 24px 16px;
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .header-left {
@@ -45,8 +48,8 @@
 }
 
 /* ==========================================
-     TIPOGRAFIA
-     ========================================== */
+   TIPOGRAFIA
+   ========================================== */
 .app-title {
   font-family: var(--font-display);
   font-size: 34px;
@@ -79,8 +82,8 @@
 }
 
 /* ==========================================
-     BOTÕES DE ÍCONE
-     ========================================== */
+   BOTÕES DE ÍCONE
+   ========================================== */
 .icon-button {
   display: flex;
   align-items: center;
@@ -109,8 +112,8 @@
 }
 
 /* ==========================================
-     CARD DE TREINO (HOME)
-     ========================================== */
+   CARD DE TREINO (HOME)
+   ========================================== */
 .workout-list {
   display: flex;
   flex-direction: column;
@@ -193,8 +196,8 @@
 }
 
 /* ==========================================
-     LISTA DE EXERCÍCIOS
-     ========================================== */
+   LISTA DE EXERCÍCIOS
+   ========================================== */
 .exercise-list {
   flex: 1;
   padding: 16px;
@@ -284,8 +287,8 @@
 }
 
 /* ==========================================
-     MENU DE CONFIGURAÇÕES
-     ========================================== */
+   MENU DE CONFIGURAÇÕES
+   ========================================== */
 .settings-menu {
   position: absolute;
   top: 60px;
@@ -300,6 +303,10 @@
   gap: 4px;
   box-shadow: var(--shadow-lg);
   min-width: 220px;
+}
+
+.settings-menu--static {
+  top: 96px;
 }
 
 .settings-menu__title {
@@ -337,8 +344,8 @@
 }
 
 /* ==========================================
-     TELA DE EXERCÍCIO
-     ========================================== */
+   TELA DE EXERCÍCIO
+   ========================================== */
 .exercise-body {
   flex: 1;
   padding: 16px;
@@ -368,11 +375,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 107, 53, 0.14),
-    rgba(255, 107, 53, 0.03)
-  );
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.14), rgba(255, 107, 53, 0.03));
   border: 1px solid rgba(255, 107, 53, 0.25);
   border-radius: 16px;
   padding: 16px;
@@ -549,7 +552,8 @@
 }
 
 .save-button--compact {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 108px;
   padding: 0 14px;
   font-size: 15px;
 }
@@ -570,7 +574,7 @@
 
 /* Timer com anel de progresso — elemento de assinatura */
 .timer {
-  flex: 0 0 auto;
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -582,7 +586,7 @@
 }
 
 .timer__duration {
-  flex: 0 0 auto;
+  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -819,8 +823,8 @@
 }
 
 /* ==========================================
-     RESPONSIVO
-     ========================================== */
+   RESPONSIVO
+   ========================================== */
 @media (max-width: 400px) {
   .app-title {
     font-size: 28px;

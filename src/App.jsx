@@ -18,102 +18,223 @@ import {
   Pencil,
   Check,
   X,
+  Home,
 } from 'lucide-react';
 
 // ==========================================
 // DADOS FALSOS INICIAIS (MOCKS)
 // ==========================================
 const MOCK_WORKOUTS = [
-  { id: 1, name: 'Segunda-Feira', focus: 'Peito, Ombro(mobilidade) e Tríceps' },
+  { id: 1, name: 'Treino A', focus: 'Peito, Ombro e Tríceps' },
   { id: 2, name: 'Treino B', focus: 'Costas, Bíceps e Abdômen' },
   { id: 3, name: 'Treino C', focus: 'Pernas Completas' },
 ];
 
 const MOCK_EXERCISES = [
   {
-    id: 1,
-    workoutId: 1,
-    name: 'Alongamento no Espaldar',
-    muscleGroup: 'Alongamento',
-    equipment: 'Espaldar',
-    prescribedGoal: 'Até sentir confortável para iniciar.',
-    imageGifUrl: exerciseImages.alongamentoEspaldar,
-  },
-  {
-    id: 2,
-    workoutId: 1,
-    name: 'Mobilidade de ombro - Rotação com bastão',
-    muscleGroup: 'Alongamento',
-    equipment: 'Barra',
-    prescribedGoal: 'Até sentir confortável para iniciar.',
-    imageGifUrl: exerciseImages.ombroRotacaoBastao,
-  },
-  {
-    id: 3,
-    workoutId: 1,
-    name: 'Supino Reto com Barra',
-    muscleGroup: 'Peito',
-    equipment: 'Barra',
-    prescribedGoal: '3 séries de 10 a 12',
-    imageGifUrl: exerciseImages.supinoReto,
-  },
-  {
-    id: 4,
-    workoutId: 1,
-    name: 'Crucifixo inclinado com halteres',
-    muscleGroup: 'Peito',
-    equipment: 'Halter',
-    prescribedGoal: '3 séries de 12 a 15',
-    imageGifUrl: exerciseImages.crucifixoInclinadoHalter,   
-  },
-  {
-    id: 5,
-    workoutId: 1,
-    name: 'Supino inclinado com halteres',
-    muscleGroup: 'Peito',
-    equipment: 'Halter',
-    prescribedGoal: '3 séries de 10 a 12',
-    imageGifUrl: exerciseImages.supinoInclinadoHalter,  
-  },
-  {
-    id: 6,
-    workoutId: 1,
-    name: 'Peito crucifixo na máquina',
-    muscleGroup: 'Peito',
-    equipment: 'Máquina Crucifixo',
-    prescribedGoal: '3 séries de 15',
-    imageGifUrl: exerciseImages.peitoCrucifixoMaquina
-  },
-  {
-    id: 7,
-    workoutId: 1,
-    name: 'Tríceps Pulley Pronado (P. Alta)',
-    muscleGroup: 'Tríceps',
-    equipment: 'Polia',
-    prescribedGoal: '3 séries de 15 a 20',
-    imageGifUrl: exerciseImages.tricepsPulleyPronado
-  },
-  {
-    id: 8,
-    workoutId: 1,
-    name: 'Tríceps Testa (P. Alta)',
-    muscleGroup: 'Tríceps',
-    equipment: 'Polia',
-    prescribedGoal: '3 séries de 10 a 12',
-    imageGifUrl: exerciseImages.tricepsTestaPoliaAlta
-  },
+      id: 1,
+      workoutId: 1,
+      name: 'Alongamento no Espaldar',
+      muscleGroup: 'Alongamento',
+      equipment: 'Espaldar',
+      prescribedGoal: 'Até sentir confortável para iniciar.',
+      imageGifUrl: exerciseImages.alongamentoEspaldar,
+    },
+    {
+      id: 2,
+      workoutId: 1,
+      name: 'Mobilidade de ombro - Rotação com bastão',
+      muscleGroup: 'Alongamento',
+      equipment: 'Barra',
+      prescribedGoal: 'Até sentir confortável para iniciar.',
+      imageGifUrl: exerciseImages.ombroRotacaoBastao,
+    },
+    {
+      id: 3,
+      workoutId: 1,
+      name: 'Supino Reto com Barra',
+      muscleGroup: 'Peito',
+      equipment: 'Barra',
+      prescribedGoal: '3 séries de 10 a 12',
+      imageGifUrl: exerciseImages.supinoReto,
+    },
+    {
+      id: 4,
+      workoutId: 1,
+      name: 'Crucifixo inclinado com halteres',
+      muscleGroup: 'Peito',
+      equipment: 'Halter',
+      prescribedGoal: '3 séries de 12 a 15',
+      imageGifUrl: exerciseImages.crucifixoInclinadoHalter,   
+    },
+    {
+      id: 5,
+      workoutId: 1,
+      name: 'Supino inclinado com halteres',
+      muscleGroup: 'Peito',
+      equipment: 'Halter',
+      prescribedGoal: '3 séries de 10 a 12',
+      imageGifUrl: exerciseImages.supinoInclinadoHalter,  
+    },
+    {
+      id: 6,
+      workoutId: 1,
+      name: 'Peito crucifixo na máquina',
+      muscleGroup: 'Peito',
+      equipment: 'Máquina Crucifixo',
+      prescribedGoal: '3 séries de 15',
+      imageGifUrl: exerciseImages.peitoCrucifixoMaquina
+    },
+    {
+      id: 7,
+      workoutId: 1,
+      name: 'Tríceps Pulley Pronado (P. Alta)',
+      muscleGroup: 'Tríceps',
+      equipment: 'Polia',
+      prescribedGoal: '3 séries de 15 a 20',
+      imageGifUrl: exerciseImages.tricepsPulleyPronado
+    },
+    {
+      id: 8,
+      workoutId: 1,
+      name: 'Tríceps Testa (P. Alta)',
+      muscleGroup: 'Tríceps',
+      equipment: 'Polia',
+      prescribedGoal: '3 séries de 10 a 12',
+      imageGifUrl: exerciseImages.tricepsTestaPoliaAlta
+    },
+    {
+      id: 9,
+      workoutId: 2,
+      name: 'Puxada Frontal',
+      muscleGroup: 'Dorsal',
+      equipment: 'Polia',
+      prescribedGoal: '3 séries de 10 a 12',
+      imageGifUrl:
+        'https://placehold.co/600x400/131824/ff6b35?text=Puxada+Frontal',
+    },
+    {
+      id: 10,
+      workoutId: 2,
+      name: 'Rosca Direta',
+      muscleGroup: 'Bíceps',
+      equipment: 'Barra W',
+      prescribedGoal: '3 séries até a falha',
+      imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Rosca+Direta',
+    },
+    {
+      id: 11,
+      workoutId: 3,
+      name: 'Agachamento',
+      muscleGroup: 'Quadríceps',
+      equipment: 'Barra',
+      prescribedGoal: '4 séries de 8',
+      imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Agachamento',
+    },
 ];
 
 // ==========================================
 // COMPONENTE 1: TELA INICIAL (MEUS TREINOS)
 // ==========================================
 function HomeScreen({ onSelectWorkout }) {
+  const [showSettings, setShowSettings] = useState(false);
+  const fileInputRef = useRef(null);
+  const todayDateString = new Date().toISOString().split('T')[0];
+
+  const handleExportData = async () => {
+    try {
+      const data = {
+        workouts: await db.workouts.toArray(),
+        exercises: await db.exercises.toArray(),
+        sessions: await db.sessions.toArray(),
+        sets: await db.sets.toArray(),
+      };
+      const json = JSON.stringify(data);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `workout_backup_${todayDateString}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      alert('Backup exportado com sucesso!');
+    } catch (error) {
+      alert('Erro ao exportar o backup.');
+    }
+  };
+
+  const handleImportData = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        await db.transaction(
+          'rw',
+          db.workouts,
+          db.exercises,
+          db.sessions,
+          db.sets,
+          async () => {
+            await db.workouts.clear();
+            await db.exercises.clear();
+            await db.sessions.clear();
+            await db.sets.clear();
+            if (data.workouts) await db.workouts.bulkAdd(data.workouts);
+            if (data.exercises) await db.exercises.bulkAdd(data.exercises);
+            if (data.sessions) await db.sessions.bulkAdd(data.sessions);
+            if (data.sets) await db.sets.bulkAdd(data.sets);
+          }
+        );
+        alert('Backup importado com sucesso!');
+        setShowSettings(false);
+      } catch (error) {
+        alert('Erro ao importar backup. Arquivo inválido.');
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <div className="screen">
       <header className="screen__header screen__header--static">
-        <h1 className="app-title">Meus Treinos</h1>
-        <p className="app-subtitle">Selecione o treino de hoje</p>
+        <div>
+          <h1 className="app-title">Meus Treinos</h1>
+          <p className="app-subtitle">Selecione o treino de hoje</p>
+        </div>
+        <button
+          onClick={() => setShowSettings(!showSettings)}
+          className="icon-button icon-button--filled"
+        >
+          <Settings size={18} />
+        </button>
       </header>
+
+      {showSettings && (
+        <div className="settings-menu settings-menu--static">
+          <h3 className="settings-menu__title">Opções de Dados</h3>
+          <button
+            onClick={handleExportData}
+            className="settings-menu__item settings-menu__item--accent"
+          >
+            <Download size={17} /> Exportar Backup (.json)
+          </button>
+          <button
+            onClick={() => fileInputRef.current.click()}
+            className="settings-menu__item"
+          >
+            <Upload size={17} /> Importar Backup
+          </button>
+          <input
+            type="file"
+            accept=".json"
+            ref={fileInputRef}
+            onChange={handleImportData}
+            style={{ display: 'none' }}
+          />
+        </div>
+      )}
 
       <main className="workout-list">
         {MOCK_WORKOUTS.map((workout) => (
@@ -191,18 +312,16 @@ function WorkoutScreen({ workout, onBack, onSelectExercise }) {
 // ==========================================
 // COMPONENTE 3: TELA DE EXECUÇÃO DO EXERCÍCIO
 // ==========================================
-function ExerciseScreen({ exercise, onBack }) {
+function ExerciseScreen({ exercise, onBack, onGoHome }) {
   const [repsInput, setRepsInput] = useState('');
   const [weightInput, setWeightInput] = useState('');
   const [unit, setUnit] = useState('kg');
-  const [showSettings, setShowSettings] = useState(false);
   const [time, setTime] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [restDuration, setRestDuration] = useState(90);
   const [editingSetId, setEditingSetId] = useState(null);
   const [editReps, setEditReps] = useState('');
   const [editWeight, setEditWeight] = useState('');
-  const fileInputRef = useRef(null);
 
   const lastSessionInfo = useLiveQuery(async () => {
     if (!exercise) return null;
@@ -323,61 +442,6 @@ function ExerciseScreen({ exercise, onBack }) {
     }
   };
 
-  const handleExportData = async () => {
-    try {
-      const data = {
-        workouts: await db.workouts.toArray(),
-        exercises: await db.exercises.toArray(),
-        sessions: await db.sessions.toArray(),
-        sets: await db.sets.toArray(),
-      };
-      const json = JSON.stringify(data);
-      const blob = new Blob([json], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `workout_backup_${todayDateString}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-      alert('Backup exportado com sucesso!');
-    } catch (error) {
-      alert('Erro ao exportar o backup.');
-    }
-  };
-
-  const handleImportData = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        await db.transaction(
-          'rw',
-          db.workouts,
-          db.exercises,
-          db.sessions,
-          db.sets,
-          async () => {
-            await db.workouts.clear();
-            await db.exercises.clear();
-            await db.sessions.clear();
-            await db.sets.clear();
-            if (data.workouts) await db.workouts.bulkAdd(data.workouts);
-            if (data.exercises) await db.exercises.bulkAdd(data.exercises);
-            if (data.sessions) await db.sessions.bulkAdd(data.sessions);
-            if (data.sets) await db.sets.bulkAdd(data.sets);
-          }
-        );
-        alert('Backup importado com sucesso!');
-        setShowSettings(false);
-      } catch (error) {
-        alert('Erro ao importar backup. Arquivo inválido.');
-      }
-    };
-    reader.readAsText(file);
-  };
-
   return (
     <div className="screen">
       <header className="screen__header">
@@ -393,37 +457,13 @@ function ExerciseScreen({ exercise, onBack }) {
           </div>
         </div>
         <button
-          onClick={() => setShowSettings(!showSettings)}
+          onClick={onGoHome}
           className="icon-button icon-button--filled"
+          aria-label="Ir para o início"
         >
-          <Settings size={18} />
+          <Home size={18} />
         </button>
       </header>
-
-      {showSettings && (
-        <div className="settings-menu">
-          <h3 className="settings-menu__title">Opções de Dados</h3>
-          <button
-            onClick={handleExportData}
-            className="settings-menu__item settings-menu__item--accent"
-          >
-            <Download size={17} /> Exportar Backup (.json)
-          </button>
-          <button
-            onClick={() => fileInputRef.current.click()}
-            className="settings-menu__item"
-          >
-            <Upload size={17} /> Importar Backup
-          </button>
-          <input
-            type="file"
-            accept=".json"
-            ref={fileInputRef}
-            onChange={handleImportData}
-            style={{ display: 'none' }}
-          />
-        </div>
-      )}
 
       <main className="exercise-body">
         <div className="hero-media">
@@ -670,19 +710,60 @@ export default function App() {
     pruneOldHistory();
   }, []);
 
+  // Garante que a tela inicial tenha uma entrada própria no histórico
+  useEffect(() => {
+    window.history.replaceState({ screen: 'home' }, '');
+  }, []);
+
+  // Sincroniza o estado da app com o botão voltar/avançar do NAVEGADOR
+  useEffect(() => {
+    const handlePopState = (event) => {
+      const state = event.state || { screen: 'home' };
+
+      if (state.screen === 'exercise') {
+        const exercise = MOCK_EXERCISES.find((e) => e.id === state.exerciseId);
+        const workout = MOCK_WORKOUTS.find((w) => w.id === exercise?.workoutId);
+        setSelectedWorkout(workout || null);
+        setSelectedExercise(exercise || null);
+        setCurrentScreen('exercise');
+      } else if (state.screen === 'workout') {
+        const workout = MOCK_WORKOUTS.find((w) => w.id === state.workoutId);
+        setSelectedWorkout(workout || null);
+        setCurrentScreen('workout');
+      } else {
+        setCurrentScreen('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Navegações "para frente" registram uma nova entrada no histórico
   const navigateToWorkout = (workout) => {
+    window.history.pushState({ screen: 'workout', workoutId: workout.id }, '');
     setSelectedWorkout(workout);
     setCurrentScreen('workout');
   };
 
   const navigateToExercise = (exercise) => {
+    window.history.pushState(
+      { screen: 'exercise', exerciseId: exercise.id },
+      ''
+    );
     setSelectedExercise(exercise);
     setCurrentScreen('exercise');
   };
 
+  const navigateHome = () => {
+    window.history.pushState({ screen: 'home' }, '');
+    setCurrentScreen('home');
+  };
+
+  // Voltar usa o histórico real do navegador — assim o botão "voltar"
+  // do navegador e o botão "voltar" da app fazem exatamente a mesma coisa
   const navigateBack = () => {
-    if (currentScreen === 'exercise') setCurrentScreen('workout');
-    else if (currentScreen === 'workout') setCurrentScreen('home');
+    window.history.back();
   };
 
   if (currentScreen === 'home') {
@@ -700,7 +781,13 @@ export default function App() {
   }
 
   if (currentScreen === 'exercise') {
-    return <ExerciseScreen exercise={selectedExercise} onBack={navigateBack} />;
+    return (
+      <ExerciseScreen
+        exercise={selectedExercise}
+        onBack={navigateBack}
+        onGoHome={navigateHome}
+      />
+    );
   }
 
   return null;
