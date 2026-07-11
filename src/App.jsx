@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './db';
 import './App.css';
-import { exerciseImages } from './exercises/importImages.js';
+import { MOCK_WORKOUTS, MOCK_EXERCISES } from './workoutsData';
 import {
   Play,
   Pause,
@@ -19,124 +19,17 @@ import {
   Check,
   X,
   Home,
+  Dumbbell,
+  ClipboardCheck,
 } from 'lucide-react';
 
-// ==========================================
-// DADOS FALSOS INICIAIS (MOCKS)
-// ==========================================
-const MOCK_WORKOUTS = [
-  { id: 1, name: 'Treino A', focus: 'Peito, Ombro e Tríceps' },
-  { id: 2, name: 'Treino B', focus: 'Costas, Bíceps e Abdômen' },
-  { id: 3, name: 'Treino C', focus: 'Pernas Completas' },
-];
-
-const MOCK_EXERCISES = [
-  {
-      id: 1,
-      workoutId: 1,
-      name: 'Alongamento no Espaldar',
-      muscleGroup: 'Alongamento',
-      equipment: 'Espaldar',
-      prescribedGoal: 'Até sentir confortável para iniciar.',
-      imageGifUrl: exerciseImages.alongamentoEspaldar,
-    },
-    {
-      id: 2,
-      workoutId: 1,
-      name: 'Mobilidade de ombro - Rotação com bastão',
-      muscleGroup: 'Alongamento',
-      equipment: 'Barra',
-      prescribedGoal: 'Até sentir confortável para iniciar.',
-      imageGifUrl: exerciseImages.ombroRotacaoBastao,
-    },
-    {
-      id: 3,
-      workoutId: 1,
-      name: 'Supino Reto com Barra',
-      muscleGroup: 'Peito',
-      equipment: 'Barra',
-      prescribedGoal: '3 séries de 10 a 12',
-      imageGifUrl: exerciseImages.supinoReto,
-    },
-    {
-      id: 4,
-      workoutId: 1,
-      name: 'Crucifixo inclinado com halteres',
-      muscleGroup: 'Peito',
-      equipment: 'Halter',
-      prescribedGoal: '3 séries de 12 a 15',
-      imageGifUrl: exerciseImages.crucifixoInclinadoHalter,   
-    },
-    {
-      id: 5,
-      workoutId: 1,
-      name: 'Supino inclinado com halteres',
-      muscleGroup: 'Peito',
-      equipment: 'Halter',
-      prescribedGoal: '3 séries de 10 a 12',
-      imageGifUrl: exerciseImages.supinoInclinadoHalter,  
-    },
-    {
-      id: 6,
-      workoutId: 1,
-      name: 'Peito crucifixo na máquina',
-      muscleGroup: 'Peito',
-      equipment: 'Máquina Crucifixo',
-      prescribedGoal: '3 séries de 15',
-      imageGifUrl: exerciseImages.peitoCrucifixoMaquina
-    },
-    {
-      id: 7,
-      workoutId: 1,
-      name: 'Tríceps Pulley Pronado (P. Alta)',
-      muscleGroup: 'Tríceps',
-      equipment: 'Polia',
-      prescribedGoal: '3 séries de 15 a 20',
-      imageGifUrl: exerciseImages.tricepsPulleyPronado
-    },
-    {
-      id: 8,
-      workoutId: 1,
-      name: 'Tríceps Testa (P. Alta)',
-      muscleGroup: 'Tríceps',
-      equipment: 'Polia',
-      prescribedGoal: '3 séries de 10 a 12',
-      imageGifUrl: exerciseImages.tricepsTestaPoliaAlta
-    },
-    {
-      id: 9,
-      workoutId: 2,
-      name: 'Puxada Frontal',
-      muscleGroup: 'Dorsal',
-      equipment: 'Polia',
-      prescribedGoal: '3 séries de 10 a 12',
-      imageGifUrl:
-        'https://placehold.co/600x400/131824/ff6b35?text=Puxada+Frontal',
-    },
-    {
-      id: 10,
-      workoutId: 2,
-      name: 'Rosca Direta',
-      muscleGroup: 'Bíceps',
-      equipment: 'Barra W',
-      prescribedGoal: '3 séries até a falha',
-      imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Rosca+Direta',
-    },
-    {
-      id: 11,
-      workoutId: 3,
-      name: 'Agachamento',
-      muscleGroup: 'Quadríceps',
-      equipment: 'Barra',
-      prescribedGoal: '4 séries de 8',
-      imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Agachamento',
-    },
-];
+// Atualize esse número a cada nova versão publicada
+const APP_VERSION = '1.0.0';
 
 // ==========================================
-// COMPONENTE 1: TELA INICIAL (MEUS TREINOS)
+// COMPONENTE 0: TELA DE BOAS-VINDAS (RAIZ DO APP)
 // ==========================================
-function HomeScreen({ onSelectWorkout }) {
+function WelcomeScreen({ onGoToWorkouts, onGoToCheckin }) {
   const [showSettings, setShowSettings] = useState(false);
   const fileInputRef = useRef(null);
   const todayDateString = new Date().toISOString().split('T')[0];
@@ -200,8 +93,8 @@ function HomeScreen({ onSelectWorkout }) {
     <div className="screen">
       <header className="screen__header screen__header--static">
         <div>
-          <h1 className="app-title">Meus Treinos</h1>
-          <p className="app-subtitle">Selecione o treino de hoje</p>
+          <h1 className="app-title">App Academia</h1>
+          <p className="app-subtitle">O que você quer fazer agora?</p>
         </div>
         <button
           onClick={() => setShowSettings(!showSettings)}
@@ -235,6 +128,63 @@ function HomeScreen({ onSelectWorkout }) {
           />
         </div>
       )}
+
+      <main className="workout-list">
+        <button onClick={onGoToWorkouts} className="workout-card">
+          <div className="workout-card__left">
+            <div className="workout-card__icon">
+              <Dumbbell size={22} />
+            </div>
+            <div>
+              <h2 className="workout-card__name">Meus Treinos</h2>
+              <p className="workout-card__focus">
+                Ver treinos e registrar séries
+              </p>
+            </div>
+          </div>
+          <ChevronRight className="workout-card__chevron" size={20} />
+        </button>
+
+        <button onClick={onGoToCheckin} className="workout-card">
+          <div className="workout-card__left">
+            <div className="workout-card__icon">
+              <ClipboardCheck size={22} />
+            </div>
+            <div>
+              <h2 className="workout-card__name">Check-in</h2>
+              <p className="workout-card__focus">
+                Marcar o que você treinou hoje
+              </p>
+            </div>
+          </div>
+          <ChevronRight className="workout-card__chevron" size={20} />
+        </button>
+      </main>
+
+      <footer className="app-footer">
+        App Academia · v{APP_VERSION} · © {new Date().getFullYear()}
+      </footer>
+    </div>
+  );
+}
+
+// ==========================================
+// COMPONENTE 1: TELA INICIAL (MEUS TREINOS)
+// ==========================================
+function HomeScreen({ onSelectWorkout, onBack }) {
+  return (
+    <div className="screen">
+      <header className="screen__header screen__header--static">
+        <div className="header-left">
+          <button onClick={onBack} className="icon-button icon-button--accent">
+            <ChevronLeft size={22} />
+          </button>
+          <div>
+            <h1 className="app-title">Meus Treinos</h1>
+            <p className="app-subtitle">Selecione o treino de hoje</p>
+          </div>
+        </div>
+      </header>
 
       <main className="workout-list">
         {MOCK_WORKOUTS.map((workout) => (
@@ -699,10 +649,203 @@ async function pruneOldHistory() {
 }
 
 // ==========================================
+// COMPONENTE: TELA DE CHECK-IN
+// ==========================================
+function CheckinScreen({ onBack }) {
+  const [selectedWorkoutId, setSelectedWorkoutId] = useState('');
+  const todayDateString = new Date().toISOString().split('T')[0];
+
+  const formatDisplayDate = (dateString) => {
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}`;
+  };
+
+  // Reaproveita a tabela de sessões que já existe — marcar check-in de um
+  // TREINO cria uma sessão (sem séries ainda) para cada exercício daquele
+  // treino, na data de hoje. Assim continua tudo dentro do mesmo backup.
+  const workoutCheckins = useLiveQuery(async () => {
+    const allSessions = await db.sessions.toArray();
+
+    // Agrupa as sessões por combinação de treino + data
+    const groups = new Map();
+    for (const session of allSessions) {
+      const exercise = MOCK_EXERCISES.find((e) => e.id === session.exerciseId);
+      if (!exercise) continue;
+      const key = `${session.date}__${exercise.workoutId}`;
+      if (!groups.has(key)) {
+        groups.set(key, {
+          date: session.date,
+          workoutId: exercise.workoutId,
+          sessionIds: [],
+        });
+      }
+      groups.get(key).sessionIds.push(session.id);
+    }
+
+    const results = [];
+    for (const { date, workoutId, sessionIds } of groups.values()) {
+      const workout = MOCK_WORKOUTS.find((w) => w.id === workoutId);
+      if (!workout) continue;
+      const totalExercises = MOCK_EXERCISES.filter(
+        (e) => e.workoutId === workoutId
+      ).length;
+      const setsCounts = await Promise.all(
+        sessionIds.map((id) => db.sets.where('sessionId').equals(id).count())
+      );
+      const hasAnySets = setsCounts.some((count) => count > 0);
+
+      results.push({
+        key: `${date}__${workoutId}`,
+        date,
+        workout,
+        doneCount: sessionIds.length,
+        totalCount: totalExercises,
+        isComplete: sessionIds.length === totalExercises,
+        hasAnySets,
+        sessionIds,
+      });
+    }
+
+    results.sort((a, b) => (a.date < b.date ? 1 : -1));
+    return results;
+  }, [todayDateString]);
+
+  const handleCheckin = async () => {
+    if (!selectedWorkoutId) return;
+    const workoutId = Number(selectedWorkoutId);
+    const exercises = MOCK_EXERCISES.filter((ex) => ex.workoutId === workoutId);
+    try {
+      await db.transaction('rw', db.sessions, async () => {
+        for (const exercise of exercises) {
+          const existing = await db.sessions
+            .where({ exerciseId: exercise.id, date: todayDateString })
+            .first();
+          if (!existing) {
+            await db.sessions.add({
+              exerciseId: exercise.id,
+              date: todayDateString,
+            });
+          }
+        }
+      });
+      setSelectedWorkoutId('');
+    } catch (error) {
+      console.error('Erro ao registrar check-in do treino:', error);
+    }
+  };
+
+  // Só permite remover se nenhum exercício do treino já tiver série
+  // registrada nele (pra nunca apagar dado de treino de verdade)
+  const handleRemoveCheckin = async (sessionIds) => {
+    try {
+      await db.sessions.bulkDelete(sessionIds);
+    } catch (error) {
+      console.error('Erro ao remover check-in:', error);
+    }
+  };
+
+  return (
+    <div className="screen">
+      <header className="screen__header">
+        <div className="header-left">
+          <button onClick={onBack} className="icon-button icon-button--accent">
+            <ChevronLeft size={22} />
+          </button>
+          <div>
+            <h1 className="screen-title">Check-in</h1>
+            <p className="screen-subtitle">
+              Hoje, {formatDisplayDate(todayDateString)}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main className="exercise-body">
+        <div className="set-form">
+          <h3 className="set-form__title">Hoje você fez qual treino?</h3>
+          <div className="checkin-picker">
+            <select
+              value={selectedWorkoutId}
+              onChange={(e) => setSelectedWorkoutId(e.target.value)}
+              className="checkin-picker__select"
+            >
+              <option value="">Selecione um treino</option>
+              {MOCK_WORKOUTS.map((workout) => (
+                <option key={workout.id} value={workout.id}>
+                  {workout.name}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={handleCheckin}
+              disabled={!selectedWorkoutId}
+              className="save-button checkin-picker__button"
+            >
+              <Check size={18} />
+              <span>Check-in</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="today-sets">
+          <h4 className="today-sets__title">
+            Histórico de Check-ins
+            {workoutCheckins ? ` (${workoutCheckins.length})` : ''}
+          </h4>
+
+          {(!workoutCheckins || workoutCheckins.length === 0) && (
+            <p className="checkin-empty">Nenhum treino registrado ainda.</p>
+          )}
+
+          {workoutCheckins &&
+            workoutCheckins.map(
+              ({
+                key,
+                date,
+                workout,
+                doneCount,
+                totalCount,
+                isComplete,
+                hasAnySets,
+                sessionIds,
+              }) => (
+                <div key={key} className="set-row">
+                  <span className="checkin-row__check">
+                    <ClipboardCheck size={16} />
+                  </span>
+                  <div className="checkin-row__info">
+                    <span className="checkin-row__name">
+                      {workout.name} — {formatDisplayDate(date)}
+                    </span>
+                    {!isComplete && (
+                      <span className="checkin-row__partial">
+                        {doneCount}/{totalCount} exercícios
+                      </span>
+                    )}
+                  </div>
+                  {!hasAnySets && (
+                    <button
+                      onClick={() => handleRemoveCheckin(sessionIds)}
+                      className="set-row__edit-btn"
+                      aria-label="Remover check-in"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+              )
+            )}
+        </div>
+      </main>
+    </div>
+  );
+}
+
+// ==========================================
 // ROTEADOR PRINCIPAL (GERENCIA AS TELAS)
 // ==========================================
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('home'); // home | workout | exercise
+  const [currentScreen, setCurrentScreen] = useState('welcome'); // welcome | home | workout | exercise | checkin
   const [selectedWorkout, setSelectedWorkout] = useState(null);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
@@ -710,15 +853,15 @@ export default function App() {
     pruneOldHistory();
   }, []);
 
-  // Garante que a tela inicial tenha uma entrada própria no histórico
+  // Garante que a tela de boas-vindas tenha uma entrada própria no histórico
   useEffect(() => {
-    window.history.replaceState({ screen: 'home' }, '');
+    window.history.replaceState({ screen: 'welcome' }, '');
   }, []);
 
   // Sincroniza o estado da app com o botão voltar/avançar do NAVEGADOR
   useEffect(() => {
     const handlePopState = (event) => {
-      const state = event.state || { screen: 'home' };
+      const state = event.state || { screen: 'welcome' };
 
       if (state.screen === 'exercise') {
         const exercise = MOCK_EXERCISES.find((e) => e.id === state.exerciseId);
@@ -730,8 +873,12 @@ export default function App() {
         const workout = MOCK_WORKOUTS.find((w) => w.id === state.workoutId);
         setSelectedWorkout(workout || null);
         setCurrentScreen('workout');
-      } else {
+      } else if (state.screen === 'checkin') {
+        setCurrentScreen('checkin');
+      } else if (state.screen === 'home') {
         setCurrentScreen('home');
+      } else {
+        setCurrentScreen('welcome');
       }
     };
 
@@ -740,6 +887,21 @@ export default function App() {
   }, []);
 
   // Navegações "para frente" registram uma nova entrada no histórico
+  const navigateToWelcome = () => {
+    window.history.pushState({ screen: 'welcome' }, '');
+    setCurrentScreen('welcome');
+  };
+
+  const navigateToHome = () => {
+    window.history.pushState({ screen: 'home' }, '');
+    setCurrentScreen('home');
+  };
+
+  const navigateToCheckin = () => {
+    window.history.pushState({ screen: 'checkin' }, '');
+    setCurrentScreen('checkin');
+  };
+
   const navigateToWorkout = (workout) => {
     window.history.pushState({ screen: 'workout', workoutId: workout.id }, '');
     setSelectedWorkout(workout);
@@ -755,19 +917,27 @@ export default function App() {
     setCurrentScreen('exercise');
   };
 
-  const navigateHome = () => {
-    window.history.pushState({ screen: 'home' }, '');
-    setCurrentScreen('home');
-  };
-
   // Voltar usa o histórico real do navegador — assim o botão "voltar"
   // do navegador e o botão "voltar" da app fazem exatamente a mesma coisa
   const navigateBack = () => {
     window.history.back();
   };
 
+  if (currentScreen === 'welcome') {
+    return (
+      <WelcomeScreen
+        onGoToWorkouts={navigateToHome}
+        onGoToCheckin={navigateToCheckin}
+      />
+    );
+  }
+
   if (currentScreen === 'home') {
-    return <HomeScreen onSelectWorkout={navigateToWorkout} />;
+    return <HomeScreen onSelectWorkout={navigateToWorkout} onBack={navigateBack} />;
+  }
+
+  if (currentScreen === 'checkin') {
+    return <CheckinScreen onBack={navigateBack} />;
   }
 
   if (currentScreen === 'workout') {
@@ -785,7 +955,7 @@ export default function App() {
       <ExerciseScreen
         exercise={selectedExercise}
         onBack={navigateBack}
-        onGoHome={navigateHome}
+        onGoHome={navigateToWelcome}
       />
     );
   }

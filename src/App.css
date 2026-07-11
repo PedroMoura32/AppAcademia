@@ -115,10 +115,20 @@
    CARD DE TREINO (HOME)
    ========================================== */
 .workout-list {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
+}
+
+.app-footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  padding: 16px;
+  border-top: 1px solid var(--border);
 }
 
 .workout-card {
@@ -820,6 +830,70 @@
 
 .set-row__edit-action--confirm {
   color: var(--accent);
+}
+
+/* Check-in */
+.checkin-picker {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.checkin-picker__select {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 48px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.checkin-picker__select:focus {
+  border-color: var(--accent);
+}
+
+.checkin-picker__button {
+  flex: 0 0 auto;
+  min-width: 130px;
+}
+
+.checkin-empty {
+  font-size: 13px;
+  color: var(--text-faint);
+  padding: 4px 0 12px;
+  margin: 0;
+}
+
+.checkin-row__check {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.checkin-row__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkin-row__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.checkin-row__partial {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
 }
 
 /* ==========================================
