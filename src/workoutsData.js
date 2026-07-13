@@ -8,9 +8,9 @@ import { exerciseImages } from './exercises/importImages.js';
 // "workoutId" apontando pro "id" do treino ao qual ele pertence.
 
 export const MOCK_WORKOUTS = [
-  { id: 1, name: 'Treino A', focus: 'Peito, Ombro e Tríceps' },
-  { id: 2, name: 'Treino B', focus: 'Costas, Bíceps e Abdômen' },
-  { id: 3, name: 'Treino C', focus: 'Pernas Completas' },
+  { id: 1, name: 'Segunda-Feira', focus: 'Peito, Ombro e Tríceps' },
+  { id: 2, name: 'Terça-Feira', focus: 'Costas, Bíceps e Abdômen' },
+  { id: 3, name: 'Quarta-Feira', focus: 'Pernas Completas' },
 ];
 
 export const MOCK_EXERCISES = [
@@ -89,21 +89,81 @@ export const MOCK_EXERCISES = [
   {
     id: 9,
     workoutId: 2,
-    name: 'Puxada Frontal',
-    muscleGroup: 'Dorsal',
-    equipment: 'Polia',
-    prescribedGoal: '3 séries de 10 a 12',
+    name: 'Mobilidade torácica - extensão torácica rolo',
+    muscleGroup: 'Articular, Alongamentos',
+    equipment: 'Rolo',
+    prescribedGoal: '20 rep',
     imageGifUrl:
-      'https://placehold.co/600x400/131824/ff6b35?text=Puxada+Frontal',
+      'https://placehold.co/600x400/131824/ff6b35?text=Mobilidade+Torácica',
   },
   {
     id: 10,
     workoutId: 2,
-    name: 'Rosca Direta',
+    name: 'Estabilidade Escapular - T borracha',
+    muscleGroup: 'Alongamento',
+    equipment: 'Elástico',
+    prescribedGoal: '3 séries até a falha',
+    imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Estabilidade+Escapular',
+  },
+  {
+  id: 11,
+  workoutId: 2,
+  name: '10 Costas Puxada Frente (Pronada)',
+  muscleGroup: 'Costas',
+  equipment: 'Puxador (Polia Alta)',
+  prescribedGoal: '3 séries de 10 rep',
+  imageGifUrl:
+    'https://placehold.co/600x400/131824/ff6b35?text=Puxada+Frente+Pronada',
+  },
+  {
+    id: 12,
+    workoutId: 2,
+    name: '10 Costas Remada Máquina (Aberta)',
+    muscleGroup: 'Costas',
+    equipment: 'Máquina de Remada',
+    prescribedGoal: '3 séries de 10 rep',
+    imageGifUrl:
+      'https://placehold.co/600x400/131824/ff6b35?text=Remada+Máquina',
+  },
+  {
+    id: 13,
+    workoutId: 2,
+    name: '08 Costas Pull Down (Polia Alta)',
+    muscleGroup: 'Costas',
+    equipment: 'Polia Alta',
+    prescribedGoal: '3 séries de 8 rep',
+    imageGifUrl:
+      'https://placehold.co/600x400/131824/ff6b35?text=Pull+Down',
+  },
+  {
+    id: 14,
+    workoutId: 2,
+    name: '08 Barra Fixa',
+    muscleGroup: 'Bíceps, Costas',
+    equipment: 'Barra Fixa',
+    prescribedGoal: '3 séries de 8 rep',
+    imageGifUrl:
+      'https://placehold.co/600x400/131824/ff6b35?text=Barra+Fixa',
+  },
+  {
+    id: 15,
+    workoutId: 2,
+    name: 'Bíceps Rosca Direta (Barra W)',
     muscleGroup: 'Bíceps',
     equipment: 'Barra W',
-    prescribedGoal: '3 séries até a falha',
-    imageGifUrl: 'https://placehold.co/600x400/131824/ff6b35?text=Rosca+Direta',
+    prescribedGoal: '3 séries de 10 rep',
+    imageGifUrl:
+      'https://placehold.co/600x400/131824/ff6b35?text=Rosca+Direta',
+  },
+  {
+    id: 16,
+    workoutId: 2,
+    name: 'Bíceps Rosca Alternada (Halteres)',
+    muscleGroup: 'Bíceps',
+    equipment: 'Halteres',
+    prescribedGoal: '3 séries de 10 rep',
+    imageGifUrl:
+      'https://placehold.co/600x400/131824/ff6b35?text=Rosca+Alternada',
   },
   {
     id: 11,
